@@ -1,231 +1,326 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tokyo Gezi Planı </title>
+    <title>Tokyo 7 Günlük Kapsamlı Gezi Planı | Ariake Merkezli</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body class="antialiased">
 
+    <div class="h-screen flex flex-col md:flex-row overflow-hidden">
 
-<div class="h-screen flex flex-col md:flex-row overflow-hidden">
-    
-    <aside class="w-full md:w-72 bg-white shadow-lg z-20 flex-shrink-0 flex flex-col h-auto md:h-full">
-        <div class="p-6 border-b border-slate-100 flex-shrink-0">
-            <h1 class="text-2xl font-bold text-indigo-900 tracking-tight mb-1">Tokyo Mega Tur</h1>
-            <p class="text-sm text-slate-500 font-medium">21 Haz - 27 Haz | TOKYO </p>
-            <div class="mt-4 bg-indigo-50 p-3 rounded-lg border border-indigo-100">
-                <p class="text-xs font-bold text-indigo-800 uppercase tracking-wider mb-1">🏨 Konaklama</p>
-                <p class="text-sm font-semibold text-slate-800">Far East Village Hotel</p>
-                <p class="text-xs text-slate-600">Ariake (Giriş: 14:00)</p>
-            </div>
-            <div class="mt-2 bg-emerald-50 p-3 rounded-lg border border-emerald-100">
-                <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1">🛫 Dönüş (NRT)</p>
-                <p class="text-sm font-semibold text-slate-800">Narita Havalimanı</p>
-                <p class="text-xs text-slate-600">27 Haz, Hedef: 14:00</p>
-            </div>
-        </div>
-        <nav class="p-4 flex gap-2 overflow-x-auto md:flex-col md:overflow-y-auto custom-scrollbar flex-1" id="day-nav">
-            <!-- Navigation buttons will be injected here -->
-        </nav>
-    </aside>
-
-    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50 relative">
-        <div class="max-w-4xl mx-auto p-4 md:p-8 pb-24">
-            
-            <section class="mb-8 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold text-slate-800 mb-2">Tur Dağılım Analizi</h2>
-                <p class="text-slate-600 text-sm mb-6 leading-relaxed">Eklediğiniz yoğun alışveriş ve hobi noktaları planın dinamizmini artırdı. Planınız; teknoloji, anime, özel Japon denimi, vintage mağazalar ve devasa metropol manzaraları arasında köprü kuruyor. Zaman yönetimi bu turda kritik önem taşıyor.</p>
-                
-                <div class="chart-container">
-                    <canvas id="categoryChart"></canvas>
+        <aside class="w-full md:w-72 bg-white shadow-lg z-20 flex-shrink-0 flex flex-col h-auto md:h-full">
+            <div class="p-6 border-b border-slate-100 flex-shrink-0">
+                <h1 class="text-2xl font-bold text-indigo-900 tracking-tight mb-1">Tokyo Gezi Planı</h1>
+                <p class="text-sm text-slate-500 font-medium">21 Haz - 27 Haz | 2026</p>
+                <div class="mt-4 bg-indigo-50 p-3 rounded-xl border border-indigo-100">
+                    <p class="text-xs font-bold text-indigo-800 uppercase tracking-wider mb-1">🏨 Konaklama</p>
+                    <p class="text-sm font-semibold text-slate-800">Far East Village Hotel</p>
+                    <p class="text-xs text-slate-600">Ariake (Giriş: 14:00)</p>
                 </div>
-            </section>
+                <div class="mt-2 bg-emerald-50 p-3 rounded-xl border border-emerald-100">
+                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1">🛫 Dönüş (NRT)</p>
+                    <p class="text-sm font-semibold text-slate-800">Narita Havalimanı</p>
+                    <p class="text-xs text-slate-600">27 Haz, Hedef: 14:00</p>
+                </div>
+            </div>
+            <nav class="p-4 flex gap-2 overflow-x-auto md:flex-col md:overflow-y-auto custom-scrollbar flex-1"
+                id="day-nav">
+                <!-- Navigation buttons will be injected here -->
+            </nav>
+        </aside>
 
-            <section id="day-content" class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 relative min-h-[500px]">
-                <!-- Day content will be injected here -->
-            </section>
+        <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50 relative">
+            <div class="max-w-4xl mx-auto p-4 md:p-8 pb-24">
 
-        </div>
-    </main>
-</div>
+                <!-- Food Guide Container (Hidden by default) -->
+                <section id="food-guide"
+                    class="hidden bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="mb-8">
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-2">🍽️ Yemek & Kafe Rehberi
+                        </h2>
+                        <p class="text-slate-500 text-sm md:text-base leading-relaxed">Tokyo geziniz boyunca bölge bölge
+                            tercih edebileceğiniz, seçilmiş restoran ve kafe alternatifleriniz.</p>
+                    </div>
 
-<script>
-    const itineraryData = [
-        {
-            day: 1,
-            date: "21 Haziran, Pazar",
-            title: "Varış & Akihabara Otaku Gecesi",
-            intro: "Otele giriş sonrası elektronik, anime ve oyun cenneti Akihabara'da yoğun bir akşam programı. Seçtiğiniz tüm oyun, figür ve teknoloji mağazalarını bu akşama sığdırdık.",
-            mapUrl: "https://maps.app.goo.gl/2VJj3zYr21d5Rkfx8",
-            stops: [
-                { time: "14:00", title: "Far East Village Hotel Ariake", category: "Otel", icon: "🏨", desc: "Otele giriş, bavulları bırakma ve kısa bir dinlenme." },
-                { time: "15:30", title: "teamLab Planets TOKYO DMM", category: "Modern Sanat Müzesi", icon: "✨", desc: "Otele çok yakın. Suyun içinde yalınayak gezdiğiniz inanılmaz dijital sergi. (Önceden bilet şart)." },
-                { time: "17:30", title: "Akihabara Radio Kaikan", category: "Alışveriş: Hobi/Figür", icon: "🤖", desc: "Akihabara istasyonunun hemen yanında. Figürler, koleksiyon kartları ve idol ürünleri ile dolu devasa bina." },
-                { time: "18:30", title: "Yodobashi Akiba", category: "Elektrik Malzemeleri", icon: "📷", desc: "9 katlı devasa teknoloji ve elektronik mağazası. Kameralardan saatlere kadar aradığınız her şey burada." },
-                { time: "19:30", title: "Animate Akihabara", category: "Çizgi Roman/Anime", icon: "📚", desc: "Anime, manga ve dōjinshi ürünlerinin merkez noktası. Katlar arası manga kültürü gezisi." },
-                { time: "20:30", title: "TRADER Headquarters", category: "Video Oyunu Mağazası", icon: "🎮", desc: "Retro oyunlar, ikinci el konsollar ve nadir bulunan Japon oyun arşivi için mükemmel bir durak." }
+                    <div class="space-y-8" id="food-categories-container">
+                        <!-- Food categories will be injected here -->
+                    </div>
+                </section>
+
+                <section id="day-content"
+                    class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 relative min-h-[500px]">
+                    <!-- Day content will be injected here -->
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const itineraryData = [
+            {
+                day: 1,
+                date: "21 Haziran, Pazar",
+                title: "Varış & Akihabara Otaku Gecesi",
+                intro: "Otele giriş sonrası elektronik, anime ve oyun cenneti Akihabara'da yoğun bir akşam programı. Yodobashi Akiba içindeki kedi kafesi de rotamızda.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Far+East+Village+Hotel+Ariake&destination=TRADER+Headquarters+Akihabara&waypoints=teamLab+Planets+TOKYO|Akihabara+Radio+Kaikan|Yodobashi+Akiba|Animate+Akihabara&travelmode=transit",
+                stops: [
+                    { time: "14:00", title: "Far East Village Hotel Ariake", category: "Otel", icon: "🏨", desc: "Otele giriş, bavulları bırakma ve kısa bir dinlenme." },
+                    { time: "15:30", title: "teamLab Planets TOKYO DMM", category: "Modern Sanat Müzesi", icon: "✨", desc: "Otele çok yakın. Suyun içinde yalınayak gezdiğiniz inanılmaz dijital sergi. (Önceden bilet şart)." },
+                    { time: "17:30", title: "Akihabara Radio Kaikan", category: "Alışveriş: Hobi", icon: "🤖", desc: "Akihabara istasyonunun hemen yanında. Figürler ve koleksiyon kartları ile dolu devasa bina." },
+                    { time: "18:30", title: "Yodobashi Akiba & Cat Cafe MOFF", category: "Elektronik & Kafe", icon: "🐈", desc: "9 katlı teknoloji mağazası. Aynı binanın içinde bulunan MOFF Kedi Kafesi'nde sevimli dostlarla mola." },
+                    { time: "19:45", title: "Animate Akihabara", category: "Çizgi Roman/Anime", icon: "📚", desc: "Anime, manga ve dōjinshi ürünlerinin merkez noktası." },
+                    { time: "20:30", title: "TRADER Headquarters", category: "Video Oyunu Mağazası", icon: "🎮", desc: "Retro oyunlar, ikinci el konsollar ve nadir bulunan Japon oyun arşivi." }
+                ]
+            },
+            {
+                day: 2,
+                date: "22 Haziran, Pazartesi",
+                title: "Ginza, İmparatorluk & Tokyo Kulesi",
+                intro: "Güne Ginza'da Onitsuka Tiger sırası ve lüks alışverişle başlıyoruz. Öğleden sonra İmparatorluk Sarayı ve tarihi tapınakları gezip, akşam ayakkabı teslimi için Ginza'ya dönüyor ve geceyi Tokyo Kulesi manzarası eşliğinde Roppongi'de bitiriyoruz.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Onitsuka+Tiger+Ginza&destination=Hard+Rock+Cafe+Tokyo+Roppongi&waypoints=Atmos+Ginza|Uniqlo+Ginza|Kokyo+Gaien+National+Garden|Yasukuni+Shrine|Hie+Shrine|Onitsuka+Tiger+Ginza|Tokyo+Tower&travelmode=transit",
+                stops: [
+                    { time: "09:30", title: "Onitsuka Tiger Ginza", category: "Ayakkabı / Sipariş", icon: "👟", desc: "Kişiselleştirme işlemi için mağaza açılışına yakın sıraya girin ve siparişinizi verin." },
+                    { time: "10:30", title: "Atmos, Gentle Monster & GU Ginza", category: "Moda / Giyim", icon: "🕶️", desc: "Sneaker butiği Atmos, lüks gözlük markası Gentle Monster ve uygun fiyatlı giyim için GU mağazası turu." },
+                    { time: "11:30", title: "The Seiko Museum & kindal ginza", category: "Müze & İkinci El", icon: "🕰️", desc: "Saat tarihini anlatan müzeyi gezin ve lüks ikinci el için kindal'a uğrayın." },
+                    { time: "12:30", title: "Uniqlo, Itoya & Ginza Loft", category: "Giyim / Yaşam", icon: "🛍️", desc: "12 katlı dev Uniqlo, efsanevi kırtasiye mağazası Itoya ve tasarım ürünler için Ginza Loft." },
+                    { time: "14:30", title: "Kokyo Gaien National Garden", category: "Ulusal Park", icon: "🌳", desc: "İmparatorluk Sarayı'nın devasa dış bahçeleri ve yeşil alanlarında yürüyüş." },
+                    { time: "15:30", title: "Yasukuni Tapınağı & Hie Shrine", category: "Shinto Tapınağı", icon: "⛩️", desc: "Savaş anıtı Yasukuni ve merdivenlerindeki torii tüneli ile ünlü Hie tapınakları." },
+                    { time: "18:00", title: "Ginza'ya Dönüş & Ayakkabı Teslimi", category: "Teslimat", icon: "🎁", desc: "Kişiselleştirilmiş ayakkabılarınızı mağaza kapanmadan teslim almak için Ginza'ya geri dönün." },
+                    { time: "19:00", title: "Zojo-ji Temple & Tokyo Kulesi", category: "Tapınak & Seyir", icon: "🗼", desc: "Arka planında ışıl ışıl Tokyo Kulesi olan Zojo-ji tapınağı (dışarıdan) ve kule ziyareti." },
+                    { time: "20:30", title: "Hard Rock Cafe Tokyo Roppongi", category: "Amerikan / Yemek", icon: "🎸", desc: "Roppongi'nin enerjik ortamında rock hatıralarıyla klasik Amerikan yemeği ile geceyi bitiriş." }
+                ]
+            },
+            {
+                day: 3,
+                date: "23 Haziran, Salı",
+                title: "Sabah Erken Asakusa & Doğu Tokyo",
+                intro: "Kalabalıklardan kaçmak için güne erkenden Sensō-ji'de başlıyoruz. Öğle yemeği için Tsukiji'ye inip ardından müzeler bölgesini geziyor ve 19:00'daki biletiniz için Skytree'ye geçiyoruz.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Senso-ji&destination=Tokyo+Skytree&waypoints=Yoroshi+Cosmetics|Tsukiji+Hongan-ji|Ueno+Park|Tokyo+National+Museum|Nezu+Shrine&travelmode=transit",
+                stops: [
+                    { time: "08:30", title: "Sensō-ji", category: "Budist Tapınağı", icon: "⛩️", desc: "Kalabalıklar gelmeden Tokyo'nun en eski tapınağının ve dev kırmızı fenerin (Kaminarimon) tadını çıkarıp fotoğraflar çekin." },
+                    { time: "10:00", title: "Yoroshi Cosmetics", category: "Kozmetik", icon: "💄", desc: "Asakusa sokaklarındaki dükkanlar açılmaya başlar. Geleneksel Japon kozmetik ürünleri satan bu popüler mağazayı ziyaret edin." },
+                    { time: "11:00", title: "Tsukiji Hongan-ji & Dış Pazar", category: "Tapınak & Yemek", icon: "🍣", desc: "Asakusa'dan güneye iniş. Hint esintili tapınağı görüp pazar kapanmadan önce (tezgahlar 14:00 gibi kapanır) muazzam sokak lezzetleriyle öğle yemeği." },
+                    { time: "13:30", title: "Ueno Parkı & Tokyo Ulusal Müzesi", category: "Park & Ulusal Müze", icon: "🏛️", desc: "Kuzeye dönüş. Geniş parkta yürüyüş ve Japonya'nın en büyük sanat ve arkeoloji müzesinde tarihi eserleri inceleme." },
+                    { time: "16:00", title: "Nezu Shrine", category: "Bahçe / Tapınak", icon: "🌸", desc: "Ueno'dan kısa bir geçiş. Kırmızı Torii kapısı tünelleriyle ünlü, Tokyo'nun huzurlu tapınaklarından biri." },
+                    { time: "17:30", title: "Akşam Yemeği Molası (Skytree Yönü)", category: "Serbest Zaman", icon: "🍜", desc: "Skytree bilet saatinize kadar Sumida nehri kıyısında veya Skytree Solamachi AVM'sinde dinlenme ve yemek vakti." },
+                    { time: "19:00", title: "Tokyo Skytree (Rezervasyon Saati)", category: "Seyir Balkonu", icon: "🗼", desc: "Bilet saatinize tam uygun olarak 634 metrelik kuleye çıkış. Tokyo'nun muazzam gece manzarasının tadını çıkarın." }
+                ]
+            },
+            {
+                day: 4,
+                date: "24 Haziran, Çarşamba",
+                title: "Büyülü Dünya: DisneySea",
+                intro: "Dünyadaki tek deniz temalı Disney parkında tam gün. Otelinizin konum avantajıyla parka çok kolay ulaşacaksınız.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Far+East+Village+Hotel+Ariake&destination=Tokyo+DisneySea&travelmode=transit",
+                stops: [
+                    { time: "08:00", title: "Tokyo DisneySea", category: "Tema Parkı", icon: "🎢", desc: "Otelden Maihama İstasyonu'na geçiş. Tüm gün muhteşem şovlar, hız trenleri ve tematik bölgelerin tadını çıkarın." }
+                ]
+            },
+            {
+                day: 5,
+                date: "25 Haziran, Perşembe",
+                title: "Batı Tokyo: Harajuku & Shinjuku",
+                intro: "Bugün birbirine komşu olan iki dev merkezi birleştiriyoruz. Sabah Harajuku'nun tapınakları ve sokak modasıyla başlayıp, öğleden sonradan geceye kadar tüm vaktimizi Shinjuku'nun dinamik sokaklarına ayırıyoruz.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Meiji+Jingu&destination=Shinjuku+Golden-Gai&waypoints=Togo+Shrine|Nike+Harajuku|MOMOTARO+JEANS+Aoyama|Shinjuku+Gyoen+National+Garden|Alpen+Tokyo|Kitamura+Camera+Shinjuku|Tokyo+Metropolitan+Government+Building&travelmode=transit",
+                stops: [
+                    { time: "09:00", title: "Meiji Tapınağı & Togo Shrine", category: "Shinto Tapınağı", icon: "⛩️", desc: "Güne Harajuku'da orman içindeki dev Meiji Jingu ve hemen yanındaki sakin Togo Shrine ile başlayın." },
+                    { time: "10:30", title: "Harajuku Sokak Modası & Vintage", category: "Alışveriş", icon: "🧥", desc: "Nike Harajuku, cas:pace, SALAMANCA ve Ms.Vintage butiklerinde alışveriş." },
+                    { time: "12:30", title: "MOMOTARO JEANS Aoyama", category: "Giyim", icon: "👖", desc: "Dünyaca ünlü, el yapımı yüksek kaliteli Japon deniminin (kot) merkezi." },
+                    { time: "14:00", title: "Shinjuku Gyoen", category: "Bahçe", icon: "🌳", desc: "Shinjuku'ya geçiş. Gökdelenlerin arasında kalmış, huzur verici muazzam Japon peyzaj bahçesinde dinlenme." },
+                    { time: "15:30", title: "Kitamura Camera & Alpen Tokyo", category: "Alışveriş", icon: "📸", desc: "Shinjuku merkezde alışveriş: Fotoğraflarınızı tab ettireceğiniz dev Kitamura Camera ve 10 katlı Alpen spor mağazası." },
+                    { time: "17:30", title: "Tokyo Metropolitan Government Building", category: "Seyir Terası", icon: "🏢", desc: "Alışveriş sonrası Shinjuku'nun devasa belediye binasının ücretsiz seyir terasına çıkıp gün batımını izleyin." },
+                    { time: "19:30", title: "Shinjuku Golden-Gai", category: "Turistik Yer / Gece", icon: "🏮", desc: "Geceyi tamamlamak için daracık sokaklarda yan yana dizilmiş yüzlerce minik retro barın bulunduğu nostaljik bölgeye geçiş." }
+                ]
+            },
+            {
+                day: 6,
+                date: "26 Haziran, Cuma",
+                title: "Kediler, Sanat & Shibuya Gecesi",
+                intro: "Güne batıdaki kedi tapınağıyla başlayıp, otaku kültürü için Nakano ve Ikebukuro'ya uğruyor, ardından Roppongi'de sanat turu yapıp günü Shibuya Sky'ın gün batımıyla taçlandırıyoruz.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Gotokuji+Temple&destination=Shibuya+Sky&waypoints=Nakano+Broadway|atmos+Ikebukuro|The+National+Art+Center+Tokyo|Shibuya+Parco|Soccer+Shop+Kamo|MEGA+Don+Quijote+Shibuya|5+CROSSTIES+COFFEE&travelmode=transit",
+                stops: [
+                    { time: "09:00", title: "Gōtokuji Temple", category: "Budist Tapınağı", icon: "🐈", desc: "Güne sakin bir başlangıç. Yüzlerce 'Maneki-neko' (şans getiren kedi) heykeliyle dolu fotoğrafik tapınak." },
+                    { time: "11:00", title: "Nakano Broadway", category: "Alışveriş Merkezi / Hobi", icon: "👾", desc: "İkinci el figürler, anime ürünleri ve Mandarake mağazalarıyla ünlü otaku AVM'si." },
+                    { time: "13:00", title: "atmos Ikebukuro", category: "Ayakkabı Mağazası", icon: "👟", desc: "Nakano'dan kuzeye Ikebukuro'ya kısa bir tren yolculuğu ile özel sneaker avı." },
+                    { time: "15:00", title: "The National Art Center, Tokyo", category: "Sanat Müzesi", icon: "🎨", desc: "Roppongi'ye geçiş. Harika dalgalı cam mimarisiyle dikkat çeken bu müzeyi gün ışığında gezin." },
+                    { time: "16:30", title: "Shibuya: Parco, Kamo & Don Quijote", category: "Alışveriş", icon: "🛍️", desc: "Shibuya'ya geçiş. Parco (Nintendo/Pokemon), Loft, Soccer Shop Kamo ve devasa MEGA Don Quijote." },
+                    { time: "18:00", title: "Shibuya Crossing & 5 CROSSTIES COFFEE", category: "Turistik & Kafe", icon: "🚶", desc: "Efsanevi yaya geçidinden geçin, ardından Scramble Square binasına girip kafede kahve molası verin." },
+                    { time: "18:30", title: "Shibuya Sky (Gün Batımı)", category: "Seyir Balkonu", icon: "🌇", desc: "18:30 giriş biletinizle hem gündüzü hem kızıllığı hem de Tokyo'nun büyüleyici gecesini yakalayın." }
+                ]
+            },
+            {
+                day: 7,
+                date: "27 Haziran, Cumartesi",
+                title: "Veda Günü: Bit Pazarı & Dönüş",
+                intro: "Son gününüzü stresten uzak tutarak, sadece yakınınızdaki dev bit pazarına ayırdık. Buradan keyifle alışverişinizi yapıp havalimanına rahatça geçebilirsiniz.",
+                mapUrl: "https://www.google.com/maps/dir/?api=1&origin=Tokyo+City+Flea+Market+Ohi&destination=Narita+International+Airport&waypoints=Far+East+Village+Hotel+Ariake&travelmode=transit",
+                stops: [
+                    { time: "08:30", title: "Tokyo City Flea Market", category: "Alışveriş (Bit Pazarı)", icon: "🏷️", desc: "Otele çok yakın olan Ohi Racecourse'ta kurulan, antika ve ikinci el hazinelerle dolu büyük bit pazarında serbest zaman." },
+                    { time: "12:30", title: "Ariake'ye Dönüş", category: "Transit", icon: "🧳", desc: "Otelinize dönüp emanete bıraktığınız bagajları alın ve Narita Havalimanı için tren/otobüs yolculuğuna başlayın." },
+                    { time: "14:30", title: "Narita Havalimanı Varış", category: "Transit", icon: "🛫", desc: "Saat 16:00'daki uçuşunuz için terminalde hazır bulunuş ve check-in işlemleri." }
+                ]
+            }
+        ];
+
+        const foodData = {
+            "Sushi & Deniz Ürünleri": [
+                { name: "Sushiro Yurakucho / Shinjuku 3-chome", type: "Uygun Fiyatlı Bant Sushi", area: "Ginza/Shinjuku", price: "¥1,000–2,000" },
+                { name: "Uobei Shibuya Dogenzaka", type: "Yüksek Hızlı Bant Sushi", area: "Shibuya", price: "¥1,000–2,000" },
+                { name: "Kaitenzushi Nemuro Hanamaru", type: "Kaliteli Bant Sushi", area: "Ginza", price: "¥2,000–5,000" },
+                { name: "Kura Sushi", type: "Uygun Fiyatlı Bant Sushi", area: "Çeşitli", price: "¥1,000–2,000" },
+                { name: "Kanazawa Maimon Sushi", type: "Kaliteli Sushi", area: "Ueno", price: "¥2,000–6,000" },
+                { name: "Gonpachi Nori-temaki", type: "Temaki (El Sushi)", area: "Harajuku", price: "¥1,000–3,000" },
+                { name: "Fish Market Tsukiji Outer Market", type: "Sokak Lezzetleri / Deniz Ürünleri", area: "Tsukiji", price: "Değişken" },
+                { name: "Ichikawa Tempura", type: "Geleneksel Tempura", area: "Çeşitli", price: "Bilinmiyor" }
+            ],
+            "Et, Ramen & Noodle": [
+                { name: "Gyukatsu Motomura", type: "Dana Şinitzel (Gyukatsu)", area: "Shibuya", price: "¥2,000–3,000" },
+                { name: "GYUKATSU Kyoto Katsugyu", type: "Dana Şinitzel (Gyukatsu)", area: "Akihabara", price: "¥2,000–3,000" },
+                { name: "Hinomaru", type: "Yakiniku (Japon Mangalı)", area: "Çeşitli", price: "¥4,000–5,000" },
+                { name: "Ninja Yakiniku Wagyu (Halal)", type: "Özel Wagyu Mangal", area: "Asakusa", price: "¥10,000+" },
+                { name: "Yakiniku Rikimaru", type: "Yakiniku (Japon Mangalı)", area: "Ikebukuro", price: "¥5,000–6,000" },
+                { name: "Tonkatsu Ginza Bairin / Tonkatsu Hajime", type: "Domuz Şinitzel (Tonkatsu)", area: "Ginza/Nihonbashi", price: "¥2,000–3,000" },
+                { name: "Ginza Hachigou", type: "Michelin Yıldızlı Ramen", area: "Ginza", price: "¥1,000–2,000" },
+                { name: "Ramen Afro Beats", type: "Modern Ramen", area: "Shinjuku", price: "¥1,000–2,000" },
+                { name: "Miyota / soba MAREN", type: "Soba Noodle", area: "Shibuya", price: "¥1,000–2,000" },
+                { name: "Menchirashi", type: "Udon Noodle", area: "Harajuku", price: "¥1,000–2,000" },
+                { name: "Yoshinoya", type: "Hızlı Gyudon (Etli Pirinç)", area: "Çeşitli", price: "¥1–1,000" }
+            ],
+            "Dünya Mutfağı & Pub": [
+                { name: "Shogun Burger", type: "Gurme Burger", area: "Shinjuku", price: "¥2,000–3,000" },
+                { name: "Gyopao Gyoza", type: "Gyoza & Izakaya", area: "Shinjuku", price: "¥2,000–3,000" },
+                { name: "CRAFT BEER BAR IBREW", type: "Butik Bira Barı", area: "Ginza", price: "¥1,000–5,000" },
+                { name: "Le Pain Quotidien", type: "Avrupa Tarzı Restoran", area: "Shiba Park", price: "¥1,000–2,000" },
+                { name: "Royal Host", type: "Japon 'Family Restaurant'", area: "Akihabara/Ginza", price: "¥1,000–2,000" }
+            ],
+            "Kahve, Tatlı & Fırın": [
+                { name: "Starbucks Reserve® Roastery", type: "Devasa Kahve Kavurma Tesisi", area: "Nakameguro", price: "¥1,000–2,000" },
+                { name: "Glitch Coffee / BONGENCOFFEE", type: "Nitelikli Kahve", area: "Ginza", price: "¥1,000–2,000" },
+                { name: "FUGLEN / Torahebi / Cafe de l'ambre", type: "Nitelikli / Tarihi Kahveciler", area: "Asakusa/Ginza", price: "¥1,000–2,000" },
+                { name: "A Happy Pancake / Flipper's", type: "Sufle Pancake", area: "Ginza/Shibuya", price: "¥1,000–2,000" },
+                { name: "Kimura-ya / Kagetsudō / SHIBUichi", type: "Tarihi ve Modern Fırınlar", area: "Ginza/Asakusa/Shibuya", price: "¥1–2,000" },
+                { name: "Marion Crêpes / 浅草茶屋たばねのし", type: "Japon Krepi", area: "Harajuku", price: "¥1–1,000" },
+                { name: "Cloud Club Matcha", type: "Matcha Kafe", area: "Çeşitli", price: "¥1,000–2,000" },
+                { name: "Age.3×Q / CHERMSIDE SANDWICH", type: "Sandviç & Tatlı", area: "Harajuku", price: "¥1–1,000" }
             ]
-        },
-        {
-            day: 2,
-            date: "22 Haziran, Pazartesi",
-            title: "Ginza Sabahı, Harajuku & Shibuya Gecesi",
-            intro: "Onitsuka Tiger'da kişiselleştirme işlemi için sabah erkenden Ginza'ya gidip sıraya giriyoruz. Öğleden sonra Harajuku'nun sokak modasına dalıyor ve günü Shibuya Sky'ın muhteşem gece manzarasıyla zirvede bitiriyoruz.",
-            mapUrl: "https://maps.app.goo.gl/wfXd3o6VmvEobR5u9",
-            stops: [
-                { time: "09:30", title: "Onitsuka Tiger Ginza Red Concept Store", category: "Ayakkabı / Kişiselleştirme", icon: "👟", desc: "Özel kişiselleştirme işlemi için güne doğrudan Ginza'da başlayıp mağaza açılışına yakın sıraya girin." },
-                { time: "11:00", title: "The Seiko Museum Ginza & kindal ginza", category: "Müze & İkinci El", icon: "🕰️", desc: "Ayakkabı sıranızı hallettikten sonra saat tarihini anlatan müzeyi gezin ve lüks ikinci el için kindal'a uğrayın." },
-                { time: "12:30", title: "Uniqlo Ginza & Ginza Loft", category: "Giyim / Yaşam", icon: "🛍️", desc: "12 katlı dev Uniqlo amiral mağazası ve tasarım kırtasiye/yaşam ürünleri için Ginza Loft turu." },
-                { time: "14:30", title: "Meiji Tapınağı & Harajuku Sokakları", category: "Tapınak & Alışveriş", icon: "⛩️", desc: "Ginza hattı ile Harajuku/Omotesando bölgesine geçiş. Önce kısa bir tapınak ormanı huzuru, ardından Nike Harajuku, cas:pace ve SALAMANCA & Ms.Vintage butiklerinde alışveriş." },
-                { time: "17:00", title: "MOMOTARO JEANS & Shibuya Parco", category: "Alışveriş", icon: "👖", desc: "Aoyama'da ünlü Japon denimi Momotaro'ya uğrayıp Shibuya'nın kalbine doğru yürüyün. Shibuya Parco AVM'de Nintendo/Pokemon mağazalarını gezin." },
-                { time: "19:00", title: "Shibuya Crossing & Shibuya Sky", category: "Turistik / Gece Manzarası", icon: "🌃", desc: "Önce efsanevi kalabalık yaya geçidinin (Scramble Crossing) atmosferini yaşayın, ardından biletinizi akşam saatine aldığınız Shibuya Sky'dan ışıl ışıl Tokyo gece manzarasını izleyin." }
-            ]
-        },
-        {
-            day: 3,
-            date: "23 Haziran, Salı",
-            title: "Geleneksel Doğu Tokyo Turu",
-            intro: "Bugün tamamen Tokyo'nun doğu yakasındayız. Sabah Tsukiji'nin deniz ürünleri enerjisiyle başlayıp, sırasıyla Ueno ve Asakusa'nın tarihi dokusunu geziyor, günü Skytree'de bitiriyoruz. Mükemmel bir coğrafi rota.",
-            mapUrl: "https://maps.app.goo.gl/Gwu9y1Y8PoWd7hnm6",
-            stops: [
-                { time: "09:00", title: "Tsukiji Hongan-ji Temple", category: "Budist Tapınağı", icon: "⛩️", desc: "Güne Tsukiji Dış Pazarı'nda sokak lezzetleriyle kahvaltı yaparak başlayın ve hemen yanındaki Hint esintili bu eşsiz tapınağı gezin." },
-                { time: "11:00", title: "Nezu Shrine Azalea Garden", category: "Bahçe / Tapınak", icon: "🌸", desc: "Kuzeye, Ueno bölgesine doğru geçiş. Kırmızı Torii kapısı tünelleriyle ünlü huzurlu bir tapınak bahçesi." },
-                { time: "12:30", title: "Ueno Parkı & Tokyo Ulusal Müzesi", category: "Park & Ulusal Müze", icon: "🏛️", desc: "Geniş Ueno parkında yürüyüş ve Japonya'nın en büyük sanat ve arkeoloji müzesinde tarihi eserleri inceleme." },
-                { time: "15:00", title: "Sensō-ji", category: "Budist Tapınağı", icon: "⛩️", desc: "Asakusa'ya geçiş. Tokyo'nun en eski tapınağı, dev kırmızı feneri (Kaminarimon) ve tarihi Nakamise alışveriş sokağı." },
-                { time: "17:30", title: "Tokyo Skytree", category: "Seyir Balkonu", icon: "🗼", desc: "Asakusa'dan yürüyerek veya kısa bir metro ile 634 metrelik Skytree'ye geçiş. Gün batımı ve gece manzarasının tadını çıkarın." }
-            ]
-        },
-        {
-            day: 4,
-            date: "24 Haziran, Çarşamba",
-            title: "Büyülü Dünya: DisneySea",
-            intro: "Dünyadaki tek deniz temalı Disney parkında tam gün. Otelinizin konum avantajıyla (Ariake'den Rinkai ve Keiyo hatları) parka çok kolay ulaşacaksınız.",
-            mapUrl: "https://maps.app.goo.gl/4cnwEDHWfrEAYR9w7",
-            stops: [
-                { time: "08:00", title: "Tokyo DisneySea", category: "Tema Parkı", icon: "🎢", desc: "Otelden Maihama İstasyonu'na geçiş. Tüm gün muhteşem şovlar, hız trenleri ve tematik bölgelerin tadını çıkarın." }
-            ]
-        },
-        {
-            day: 5,
-            date: "25 Haziran, Perşembe",
-            title: "Batı Tokyo Merkez: Shinjuku & Nakano",
-            intro: "Shinjuku İstasyonu'nu merkez (hub) olarak kullandığımız gün. Buradan Setagaya'ya (Kedi Tapınağı) ve Nakano'ya (Anime/Hobi Merkezi) çok kolay geçiş yapacağız.",
-            mapUrl: "https://maps.app.goo.gl/faSZNtmv1cfzG8Ww8",
-            stops: [
-                { time: "09:00", title: "Gōtokuji Temple", category: "Budist Tapınağı", icon: "🐈", desc: "Güne sakin bir başlangıç. Shinjuku'dan Odakyu hattıyla ulaşılan, yüzlerce 'Maneki-neko' (şans getiren kedi) heykeliyle dolu fotoğrafik tapınak." },
-                { time: "11:30", title: "Shinjuku Gyoen", category: "Bahçe", icon: "🌳", desc: "Shinjuku'ya dönüş. Gökdelenlerin arasında kalmış, Japon, Fransız ve İngiliz peyzaj tarzlarını barındıran muazzam bahçe." },
-                { time: "13:30", title: "Sports wear Disc. Alpen Tokyo", category: "Spor Mağazası", icon: "🏂", desc: "Shinjuku'nun kalbinde 10 katlı devasa spor, sneaker, kamp ve outdoor ekipmanları mağazası." },
-                 { time: "15:00", title: "Shinjuku Kitamura Camera", category: "Kamera / Fotoğraf Baskı", icon: "📷", desc: "Fotoğraf tutkunları için cennet. Önceki günlerde çektiğiniz fotoğrafları burada yüksek kalitede tab ettirebilir, vintage kameraları inceleyebilirsiniz." },
-                { time: "16:00", title: "Nakano Broadway", category: "Alışveriş Merkezi / Hobi", icon: "👾", desc: "Shinjuku'dan Chuo hattı ile sadece 1 durak! Akihabara'nın batıdaki alternatifi, ikinci el figürler ve Mandarake mağazalarıyla ünlü otaku AVM'si." },
-                { time: "19:30", title: "Shinjuku Golden-Gai", category: "Turistik Yer / Gece", icon: "🏮", desc: "Geceyi tamamlamak için tekrar Shinjuku'ya dönüş. Daracık sokaklarda yan yana dizilmiş yüzlerce minik retro barın bulunduğu nostaljik bölge." }
-            ]
-        },
-        {
-            day: 6,
-            date: "26 Haziran, Cuma",
-            title: "İmparatorluk Tapınakları & Roppongi",
-            intro: "Bugün daha sakin ve kültürel bir tempomuz var. Tokyo'nun merkezindeki önemli tapınakları gezip günü Roppongi'de sanat ve müzik ile bitiriyoruz.",
-            mapUrl: "https://maps.app.goo.gl/hQgtUopmDLUpbza89",
-            stops: [
-                { time: "10:00", title: "Yasukuni Tapınağı", category: "Shinto Tapınağı", icon: "⛩️", desc: "Güne Tokyo merkezde başlıyoruz. Japonya'nın savaşlarda ölenlerini anan, devasa torii kapısıyla dikkat çeken tarihi tapınak." },
-                { time: "11:30", title: "Hie Shrine", category: "Shinto Tapınağı", icon: "⛩️", desc: "Kısa bir geçişle Akasaka bölgesinde, gökdelenler arasında kalmış ve arka tarafındaki kırmızı torii kapıları merdiveni ile meşhur tapınak." },
-                { time: "14:00", title: "The National Art Center, Tokyo", category: "Sanat Müzesi", icon: "🎨", desc: "Roppongi'ye geçiş. Harika dalgalı cam mimarisiyle dikkat çeken, sürekli değişen sergilere ev sahipliği yapan müze." },
-                { time: "16:00", title: "Zojo-ji Temple & Tokyo Kulesi", category: "Tapınak & Seyir", icon: "🗼", desc: "Roppongi'den Minato'ya geçiş. Arka planında ikonik Tokyo Kulesi olan Zojo-ji tapınağında gün batımı ve ardından kule ziyareti." },
-                { time: "19:00", title: "Hard Rock Cafe Tokyo Roppongi", category: "Amerikan / Yemek", icon: "🎸", desc: "Günü ve geziyi Roppongi'nin enerjik ortamında klasik Amerikan yemeği ve rock hatıralarıyla kutlayarak bitirin." }
-            ]
-        },
-        {
-            day: 7,
-            date: "27 Haziran, Cumartesi",
-            title: "Veda Günü: Bit Pazarı & Dönüş",
-            intro: "Son gününüzü stresten uzak tutarak, sadece yakınınızdaki dev bit pazarına ayırdık. Buradan keyifle alışverişinizi yapıp havalimanına rahatça geçebilirsiniz.",
-            mapUrl: "https://maps.app.goo.gl/Ms8pEGsNzUjivaULA",
-            stops: [
-                { time: "08:30", title: "Tokyo City Flea Market", category: "Alışveriş (Bit Pazarı)", icon: "🏷️", desc: "Otele çok yakın olan Ohi Racecourse'ta kurulan, antika ve ikinci el hazinelerle dolu büyük bit pazarında serbest zaman." },
-                { time: "12:30", title: "Ariake'ye Dönüş", category: "Transit", icon: "🧳", desc: "Otelinize dönüp emanete bıraktığınız bagajları alın ve Narita Havalimanı için tren/otobüs yolculuğuna başlayın." },
-                { time: "14:30", title: "Narita Havalimanı Varış", category: "Transit", icon: "🛫", desc: "Saat 16:00'daki uçuşunuz için terminalde hazır bulunuş ve check-in işlemleri." }
-            ]
-        }
-    ];
+        };
 
-    let currentDayIndex = 0;
+        let currentDayIndex = 0;
+        let showingFoodGuide = false;
 
-    function sortStops(dayIndex) {
-        itineraryData[dayIndex].stops.sort((a, b) => {
-            return a.time.localeCompare(b.time);
-        });
-    }
+        function renderNavigation() {
+            const navContainer = document.getElementById('day-nav');
+            navContainer.innerHTML = '';
 
-    window.updateStopTime = function(dayIdx, stopIdx, newTime) {
-        if(!newTime) return;
-        const stop = itineraryData[dayIdx].stops[stopIdx];
-        if (stop.time === newTime) return;
-        
-        stop.time = newTime;
-        sortStops(dayIdx);
-        renderDayContent();
-    };
+            // Render Day Buttons
+            itineraryData.forEach((data, index) => {
+                const btn = document.createElement('button');
+                const isActive = index === currentDayIndex && !showingFoodGuide;
+                btn.className = `w-full text-left px-4 py-3 rounded-xl font-medium transition-all duration-200 whitespace-nowrap md:whitespace-normal flex-shrink-0 md:flex-shrink border ${isActive ? 'bg-indigo-600 text-white shadow-md border-indigo-700 scale-[1.02]' : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 hover:border-indigo-300'}`;
+                btn.innerHTML = `<span class="block text-[11px] font-bold uppercase tracking-wider ${isActive ? 'text-indigo-200' : 'text-slate-400'} mb-0.5">Gün ${data.day}</span><span class="block truncate">${data.date.split(',')[0]}</span>`;
+                btn.onclick = () => {
+                    showingFoodGuide = false;
+                    currentDayIndex = index;
+                    renderNavigation();
+                    toggleViews();
+                    renderDayContent();
+                };
+                navContainer.appendChild(btn);
+            });
 
-    window.updateStopDay = function(oldDayIdx, stopIdx, newDayIdx) {
-        newDayIdx = parseInt(newDayIdx);
-        if (oldDayIdx === newDayIdx) return;
-        
-        const stop = itineraryData[oldDayIdx].stops.splice(stopIdx, 1)[0];
-        itineraryData[newDayIdx].stops.push(stop);
-        sortStops(newDayIdx);
-        
-        renderDayContent();
-    };
+            // Add Divider
+            const divider = document.createElement('div');
+            divider.className = "w-px h-8 md:w-full md:h-px bg-slate-200 my-1 mx-2 flex-shrink-0";
+            navContainer.appendChild(divider);
 
-    function renderNavigation() {
-        const navContainer = document.getElementById('day-nav');
-        navContainer.innerHTML = '';
-        
-        itineraryData.forEach((data, index) => {
-            const btn = document.createElement('button');
-            const isActive = index === currentDayIndex;
-            btn.className = `w-full text-left px-4 py-3 rounded-xl font-medium transition-all duration-200 whitespace-nowrap md:whitespace-normal flex-shrink-0 md:flex-shrink border ${isActive ? 'bg-indigo-600 text-white shadow-md border-indigo-700 scale-[1.02]' : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 hover:border-indigo-300'}`;
-            btn.innerHTML = `<span class="block text-[11px] font-bold uppercase tracking-wider ${isActive ? 'text-indigo-200' : 'text-slate-400'} mb-0.5">Gün ${data.day}</span><span class="block truncate">${data.date.split(',')[0]}</span>`;
-            btn.onclick = () => {
-                currentDayIndex = index;
+            // Render Food Guide Button
+            const foodBtn = document.createElement('button');
+            foodBtn.className = `w-full text-left px-4 py-3 rounded-xl font-bold transition-all duration-200 whitespace-nowrap md:whitespace-normal flex-shrink-0 md:flex-shrink border ${showingFoodGuide ? 'bg-orange-500 text-white shadow-md border-orange-600 scale-[1.02]' : 'bg-orange-50 text-orange-700 hover:bg-orange-100 border-orange-200 hover:border-orange-300'}`;
+            foodBtn.innerHTML = `🍽️ Yemek Rehberi`;
+            foodBtn.onclick = () => {
+                showingFoodGuide = true;
                 renderNavigation();
-                renderDayContent();
+                toggleViews();
+                renderFoodGuide();
             };
-            navContainer.appendChild(btn);
-        });
-    }
+            navContainer.appendChild(foodBtn);
+        }
 
-    function renderDayContent() {
-        const contentContainer = document.getElementById('day-content');
-        const data = itineraryData[currentDayIndex];
-        
-        let stopsHtml = '';
-        data.stops.forEach((stop, idx) => {
-            const isLast = idx === data.stops.length - 1;
-            stopsHtml += `
+        function toggleViews() {
+            const dayContent = document.getElementById('day-content');
+            const foodGuide = document.getElementById('food-guide');
+
+            if (showingFoodGuide) {
+                dayContent.classList.add('hidden');
+                foodGuide.classList.remove('hidden');
+            } else {
+                foodGuide.classList.add('hidden');
+                dayContent.classList.remove('hidden');
+            }
+        }
+
+        function renderFoodGuide() {
+            const container = document.getElementById('food-categories-container');
+            container.innerHTML = '';
+
+            for (const [category, items] of Object.entries(foodData)) {
+                let itemsHtml = items.map(item => `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 hover:bg-slate-50 rounded-lg border border-transparent hover:border-slate-100 transition-colors">
+                    <div>
+                        <p class="font-bold text-slate-800">${item.name}</p>
+                        <p class="text-xs font-semibold text-orange-600 uppercase tracking-wider">${item.type}</p>
+                    </div>
+                    <div class="flex items-center gap-3 mt-2 sm:mt-0">
+                        <span class="text-xs font-medium bg-slate-100 text-slate-600 px-2 py-1 rounded flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                            ${item.area}
+                        </span>
+                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">${item.price}</span>
+                    </div>
+                </div>
+            `).join('');
+
+                container.innerHTML += `
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-700">${category}</h3>
+                    </div>
+                    <div class="p-2 divide-y divide-slate-100">
+                        ${itemsHtml}
+                    </div>
+                </div>
+            `;
+            }
+        }
+
+        function renderDayContent() {
+            const contentContainer = document.getElementById('day-content');
+            const data = itineraryData[currentDayIndex];
+
+            let stopsHtml = '';
+            data.stops.forEach((stop, idx) => {
+                const isLast = idx === data.stops.length - 1;
+                stopsHtml += `
                 <div class="relative pl-12 py-5 stop-card ${!isLast ? 'border-b border-slate-100' : ''}">
-                    <div class="absolute left-0 top-6 w-9 h-9 ${stop.category.includes('Alışveriş') || stop.category.includes('Mağaza') || stop.category.includes('Ayakkabı') || stop.category.includes('Giyim') ? 'bg-amber-100 text-amber-700' : stop.category.includes('Tapınak') || stop.category.includes('Bahçe') ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'} rounded-full flex items-center justify-center font-bold text-base z-10 ring-4 ring-white shadow-sm">
+                    <div class="absolute left-0 top-6 w-9 h-9 ${stop.category.includes('Alışveriş') || stop.category.includes('Mağaza') || stop.category.includes('Ayakkabı') || stop.category.includes('Giyim') || stop.category.includes('Kamera') ? 'bg-amber-100 text-amber-700' : stop.category.includes('Tapınak') || stop.category.includes('Bahçe') ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'} rounded-full flex items-center justify-center font-bold text-base z-10 ring-4 ring-white shadow-sm">
                         ${stop.icon}
                     </div>
-                    <div class="flex flex-col sm:flex-row sm:items-center mb-1.5 gap-2 group/edit">
-                        <div class="flex items-center gap-1 z-20 relative">
-                            <input type="time" value="${stop.time}" onchange="updateStopTime(${currentDayIndex}, ${idx}, this.value)" class="text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded-md border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer transition-colors shadow-sm" title="Saati Değiştir">
-                            <select onchange="updateStopDay(${currentDayIndex}, ${idx}, this.value)" class="text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded-md border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer transition-colors shadow-sm" title="Günü Değiştir">
-                                ${itineraryData.map((d, dIdx) => `<option value="${dIdx}" ${dIdx === currentDayIndex ? 'selected' : ''}>Gün ${d.day}</option>`).join('')}
-                            </select>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-800 group-hover/edit:text-indigo-600 transition-colors">${stop.title}</h3>
+                    <div class="flex flex-col sm:flex-row sm:items-center mb-1.5 gap-2">
+                        <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md tracking-wide w-fit">${stop.time}</span>
+                        <h3 class="text-lg font-bold text-slate-800">${stop.title}</h3>
                     </div>
                     <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">${stop.category}</p>
                     <p class="text-slate-600 text-sm leading-relaxed">${stop.desc}</p>
                 </div>
             `;
-        });
+            });
 
-        contentContainer.innerHTML = `
+            contentContainer.innerHTML = `
             <div class="mb-6">
                 <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-3">${data.title}</h2>
                 <p class="text-slate-600 text-sm md:text-base leading-relaxed p-4 bg-slate-50 rounded-xl border border-slate-200 mb-4">${data.intro}</p>
@@ -239,116 +334,16 @@
             
             <div class="relative mt-6 pt-2 border-t border-slate-100">
                 <div class="timeline-line"></div>
-                ${data.stops.length > 0 ? stopsHtml : '<div class="pl-12 py-5"><p class="text-slate-500 font-medium bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">Bu gün için planlanmış etkinlik bulunmuyor.</p></div>'}
+                ${stopsHtml}
             </div>
         `;
-    }
-
-    function initChart() {
-        const ctx = document.getElementById('categoryChart').getContext('2d');
-        
-        // Gelişmiş kategorizasyon mantığı
-        const categoryMap = {
-            'Alışveriş: Giyim/Moda/Vintage': ['Giyim Mağazası', 'Spor Mağazası', 'Ayakkabı', 'Aksesuar Mağazası', 'Kullanılmış Eşya / Vintage', 'Tuhafiye / Tasarım'],
-            'Alışveriş: Elektronik/Hobi': ['Video Oyunu Mağazası', 'Çizgi Roman/Anime', 'Elektrik Malzemeleri', 'Alışveriş: Hobi/Figür', 'Alışveriş Merkezi / Hobi'],
-            'Alışveriş: Genel AVM': ['Alışveriş Merkezi', 'Market / Yaşam', 'İndirimli Ürünler', 'Saatçi / Outlet', 'Alışveriş (Bit Pazarı)'],
-            'Tapınak & Mabet': ['Budist Tapınağı', 'Shinto Tapınağı'],
-            'Müze & Sanat': ['Sanat Müzesi', 'Müze', 'Modern Sanat Müzesi', 'Ulusal Müze'],
-            'Park & Doğa': ['Bahçe', 'Park', 'Ulusal Park', 'Bahçe / Tapınak'],
-            'Seyir & Turistik': ['Seyir Balkonu', 'Turistik Yer', 'Seyir', 'Turistik / Seyir', 'Turistik Yer / Gece'],
-            'Eğlence & Diğer': ['Tema Parkı', 'Amerikan / Yemek']
-        };
-
-        const aggregatedData = {};
-
-        itineraryData.forEach(day => {
-            day.stops.forEach(stop => {
-                if (stop.category === 'Otel' || stop.category === 'Transit') return;
-                
-                let foundCategory = 'Eğlence & Diğer'; // Default
-                for (const [mainCat, subCats] of Object.entries(categoryMap)) {
-                    if (subCats.some(sub => stop.category.includes(sub))) {
-                        foundCategory = mainCat;
-                        break;
-                    }
-                }
-                aggregatedData[foundCategory] = (aggregatedData[foundCategory] || 0) + 1;
-            });
-        });
-
-        const labels = Object.keys(aggregatedData);
-        const dataValues = Object.values(aggregatedData);
-
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: dataValues,
-                    backgroundColor: [
-                        '#f59e0b', // Amber (Giyim)
-                        '#8b5cf6', // Purple (Hobi)
-                        '#ec4899', // Pink (AVM)
-                        '#10b981', // Emerald (Tapınak)
-                        '#3b82f6', // Blue (Müze)
-                        '#84cc16', // Lime (Park)
-                        '#64748b', // Slate (Turistik)
-                        '#ef4444'  // Red (Eğlence)
-                    ],
-                    borderWidth: 2,
-                    borderColor: '#ffffff',
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: window.innerWidth < 768 ? 'bottom' : 'right',
-                        labels: {
-                            boxWidth: 15,
-                            padding: 15,
-                            font: { family: "'Segoe UI', sans-serif", size: 12, weight: '500' },
-                            color: '#475569'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                        padding: 12,
-                        titleFont: { size: 13 },
-                        bodyFont: { size: 14, weight: 'bold' },
-                        callbacks: {
-                            label: function(context) {
-                                return ` ${context.label}: ${context.parsed} Durak`;
-                            }
-                        }
-                    }
-                },
-                cutout: '60%',
-                layout: {
-                    padding: 10
-                }
-            }
-        });
-    }
-
-    // Initialize
-    renderNavigation();
-    renderDayContent();
-    
-    // Delay chart init slightly to ensure container is rendered and sized
-    setTimeout(initChart, 150); 
-    
-    // Handle resize for chart legend positioning
-    window.addEventListener('resize', () => {
-        const chart = Chart.getChart('categoryChart');
-        if (chart) {
-            chart.options.plugins.legend.position = window.innerWidth < 768 ? 'bottom' : 'right';
-            chart.update();
         }
-    });
 
-</script>
+        // Initialize
+        renderNavigation();
+        renderDayContent();
+
+    </script>
 </body>
+
 </html>
